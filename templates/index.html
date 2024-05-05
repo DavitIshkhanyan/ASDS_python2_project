@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
+    <title>Fashion MNIST</title>
+</head>
+<body>
+    <header>
+        <h1>Fashion MNIST</h1>
+        <h2>Upload an image to determine it's type</h2>
+    </header>
+    <main>
+        <input type="file" name="file" id="imageInput" accept="image/*">
+        <button type="submit" id="submitButton" title="Upload Image">Upload Image</button>
+        <div id="segmentedImage"></div>
+    </main>
+    <footer></footer>
+    <script src="static/main.js"></script>
+</body>
+</html>
