@@ -1,6 +1,8 @@
-document.getElementById('submitButton').addEventListener('click', async function(e) {
-    const fileInput = document.getElementById('imageInput');
-    file = fileInput.files[0];
+const submitButton = document.getElementById('submitButton');
+const fileInput = document.getElementById('imageInput');
+
+submitButton.addEventListener('click', async function(e) {
+    const file = fileInput.files[0];
     if (!file) {
         alert('Please select an image.');
         return;
@@ -15,7 +17,7 @@ document.getElementById('submitButton').addEventListener('click', async function
             body: formData
         });
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         const img = document.createElement('img');
         img.src = 'data:image/png;base64,' + data.mask_image;
