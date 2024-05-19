@@ -11,7 +11,8 @@ from fastapi.responses import HTMLResponse
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from pydantic import BaseModel, Field
+# import os
+from inference.model_prediction import FashionMnist
 
 # from segmentation import SegmentationModel
 
@@ -21,16 +22,20 @@ app = FastAPI(
     title="Image Segmentation API",
     description="Processes uploaded images and returns segmented versions.",
     version="0.0.1",
-    openapi_tags=[{"name": "Segment", "description": "API endpoints related to image segmentation"}]
+    openapi_tags=[{"name": "Predict", "description": "API endpoints that return predicted label"}]
 )
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 template = Jinja2Templates(directory='templates')
 
-@app.get("/", tags=["Greeting"])
+# dir_path = os.path.dirname(
+#     os.path.realpath(os.path.join(os.getcwd()))
+# )
+
+@app.get("/", tags=["Home page"])
 def root(req: Request):
-    """Greet a user."""
+    """Home page."""
     return template.TemplateResponse(
         name='index.html',
         context={'request': req}
@@ -50,8 +55,8 @@ def root(req: Request):
 # model = SegmentationModel()
 
 
-@app.post("/segment-image/", tags=["Segment"])
-async def segment_image(
+@app.post("/predict-label/", tags=["Predict"])
+async def predict_label(
         file: UploadFile = File(description="A required image file for segmentation.")
 ):
     """Receives an image file and segments it using a predefined model, returning the segmented
@@ -72,7 +77,9 @@ async def segment_image(
     image = Image.open(io.BytesIO(image_data))
 
     img_array = np.array(image)
-    print(img_array, 'img_array')
+    fmnist = FashionMnist("model/saved_model.pth")
+
+    label_number, label_name = fmnist.predict(img_array)
     # Process the image through the segmentation model.
     # mask = model(image)
 
@@ -93,7 +100,7 @@ async def segment_image(
     # result_image_base64 = base64.b64encode(byte_arr.getvalue()).decode("ascii")
     result_image_base64 = base64.b64encode(image_data).decode("ascii")
 
-    return {"filename": file.filename, "mask_image": result_image_base64}
+    return {"filename": file.filename, "mask_image": result_image_base64, "label_number": label_number, "label_name": label_name}
 
 
 if __name__ == "__main__":

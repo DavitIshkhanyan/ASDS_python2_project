@@ -1,6 +1,8 @@
 #segmentedImage img {
-    max-width: 200px;
-    max-height: 200px;
+    /*max-width: 200px;*/
+    /*max-height: 200px;*/
+    width: 200px;
+    height: 200px;
 }
 
 /* Reset default margin and padding */
@@ -76,4 +78,16 @@ footer {
     color: #fff;
     padding: 10px 0;
     text-align: center;
+}
+
+header ol {
+    text-align: left; /* Ensure text aligns from the left within the centered list */
+    display: inline-block; /* Inline-block to center the ol itself */
+    padding-left: 0; /* Remove default padding */
+    margin: 0 auto; /* Center the ol */
+    list-style-position: inside; /* Ensure the numbers are inside the list */
+}
+
+header ol li {
+    margin-bottom: 5px; /* Maintain vertical spacing between items */
 }
