@@ -17,7 +17,6 @@ submitButton.addEventListener('click', async function(e) {
             body: formData
         });
         const data = await response.json();
-        // console.log(data);
 
         const img = document.createElement('img');
         const label = document.createElement('p');

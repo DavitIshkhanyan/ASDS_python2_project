@@ -3,3 +3,12 @@ uvicorn==0.29.0
 numpy==1.23.5
 torch==2.3.0
 torchvision==0.18.0
+opencv-python==4.9.0.80
+pydantic==2.7.1
+pillow==9.1.0
+idx2numpy==1.2.3
+pandas==1.4.2
+matplotlib==3.5.2
+tqdm==4.66.2
+seaborn==0.13.2
+scikit-learn==1.1.0
