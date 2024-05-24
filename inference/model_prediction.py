@@ -1,11 +1,7 @@
-import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import cv2
 import torch
 import torch.nn as nn
-import torchvision.transforms as transforms
-from torch.utils.data import DataLoader
 
 
 class CNN(nn.Module):
