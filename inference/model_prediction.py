@@ -9,7 +9,30 @@ from torch.utils.data import DataLoader
 
 
 class CNN(nn.Module):
+    """
+    CNN class is used as model architecure for Fashion Mnist dataset.
+    It's Neural network, which will load model weights and use for predictions.
+
+    ...
+
+    Attributes
+    ------------
+    num_labels(int): 
+        Integer number for the count of distinct labels in dataset(default value is 10).
+
+    Methods
+    ------------
+    forward(x): 
+        Forwarding input via neural network and gets the predicted vector.
+    """
+
     def __init__(self, num_labels=10):
+        """
+        Args:
+            num_labels(int): The number of labels in model prediction.
+
+        """
+
         super().__init__()
         self.layers = nn.Sequential(
             nn.Conv2d(1, 32, kernel_size=3),  # 26 x 26 x 32
@@ -33,13 +56,58 @@ class CNN(nn.Module):
         )
 
     def forward(self, x):
+        """
+        Forwarding input via neural network and gets the predicted vector.
+
+        Args:
+            x(torch.tensor): The tensor which is the image 1x1x28x28 size.
+        
+        Returns (torch.tensor):
+            Output vector after neural network.
+        """
         x = self.layers(x)
         return x
    
 
  
 class FashionMnist:
+    """
+    Fashion Mnsit class is for Fashion Mnist dataset for reading jpeg
+    images, plotting and predicting image labels.
+
+    ...
+
+    Attributes
+    ------------
+    model_path(str):  
+        Path to the saved model.
+    device(torch.device): 
+        Device on which model will predict. 
+        If exists cuda then will take it, otherwsie cpu.
+    model(CNN):  
+        Object of CNN class, which is main model.
+    fashion_dict(dict):  
+        Class numbers and lables mapping dictionay.
+        The dictionary size is 10, meaning that have 10 unique labels.
+
+    Methods
+    ------------
+    read_jpeg_image(path):
+        Reading jpef format saved image into array.
+    plot_image(image):
+        Plotting fshion mnist image from input.
+    predict(image, label=None):
+        Predicting image label and returing back with class
+        number and class label.
+        If label is passed then printing both real and predicted labels.
+        If None, then not printing.
+    """
     def __init__(self, model_path):
+        """
+        Args:
+            model_path(str): Saved model path.
+
+        """
         self.fashion_dict = {
             0: "T-shirt/top",
             1: "Trouser",
@@ -58,10 +126,27 @@ class FashionMnist:
         self.model.to(self.device)
 
     def read_jpeg_image(self, path):
+        """
+        Reading .jpeg format saved image inot array.
+
+        Args:
+            path(str): 
+                Path to image file.
+        
+        Returns:
+            Image array.
+        """
         image_read = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
         return image_read
 
     def plot_image(self, image):
+        """
+        Plotting image from array.
+
+        Args:
+            image(array): 
+                Image array.
+        """
         plt.figure(figsize=(2, 2))
         plt.xticks([])
         plt.yticks([])
@@ -70,6 +155,19 @@ class FashionMnist:
         plt.show()
     
     def predict(self, image, label=None):
+        """
+        Predicts image label by model.
+
+        Args:
+            image(array): 
+                Image array.
+            label(str): 
+                Real label of image.
+                If label is None nothing happens, otherwise prints real and predicted labels of image.
+        
+        Returns (tuple):
+            Predicted image label number, and label name.
+        """
         preprocessed_image = image.astype('float32')
         preprocessed_image = torch.tensor(preprocessed_image)
         preprocessed_image = preprocessed_image.unsqueeze(0)
