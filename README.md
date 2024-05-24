@@ -19,6 +19,9 @@ The labels are as follows:
 - 8: "Bag"
 - 9: "Ankle boot"
 
+Data link `https://github.com/zalandoresearch/fashion-mnist/tree/master/data/fashion`
+Create data folder and put it there.
+
 ## Project Structure
 
 - The test images for API predictions are separated in the `model_creation/separating_test_images.ipynb` notebook.
