@@ -6,7 +6,7 @@ import torch.nn as nn
 
 class CNN(nn.Module):
     """
-    CNN class is used as model architecure for Fashion Mnist dataset.
+    CNN class is used as model architecture for Fashion Mnist dataset.
     It's Neural network, which will load model weights and use for predictions.
 
     ...
@@ -68,7 +68,7 @@ class CNN(nn.Module):
  
 class FashionMnist:
     """
-    Fashion Mnsit class is for Fashion Mnist dataset for reading jpeg
+    Fashion Mnist class is for Fashion Mnist dataset for reading jpeg
     images, plotting and predicting image labels.
 
     ...
@@ -83,7 +83,7 @@ class FashionMnist:
     model(CNN):  
         Object of CNN class, which is main model.
     fashion_dict(dict):  
-        Class numbers and lables mapping dictionay.
+        Class numbers and labels mapping dictionary.
         The dictionary size is 10, meaning that have 10 unique labels.
 
     Methods
@@ -93,7 +93,7 @@ class FashionMnist:
     plot_image(image):
         Plotting fshion mnist image from input.
     predict(image, label=None):
-        Predicting image label and returing back with class
+        Predicting image label and returning back with class
         number and class label.
         If label is passed then printing both real and predicted labels.
         If None, then not printing.
